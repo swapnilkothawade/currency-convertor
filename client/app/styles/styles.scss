@@ -21,3 +21,7 @@ nav {
     background: gray;
     color: white;
 }
+
+.x.axis text {
+    transform: rotate(-45deg);
+}
