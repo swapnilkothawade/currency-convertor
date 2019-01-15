@@ -129,7 +129,7 @@ class Home extends Component {
         <div>
           <Header currentRates={this.state.currentRate} updatedDate={this.state.updatedDate} />
           <RefreshButton refreshdata={() => this.handleClick()} />
-          <Chart></Chart>
+          <Chart currentRates={this.state.rates}></Chart>
           <Table currentRates={this.state.filteredRates} sortData={e => this.sort(e)} filterdata={(e) => this.handleChange(e)} />
         </div>
       </>
