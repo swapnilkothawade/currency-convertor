@@ -21,6 +21,10 @@
 nav {
     background: gray;
     color: white;
+
+    .navbar-brand {
+        width: 100%;
+    }
 }
 
 .x.axis text {
