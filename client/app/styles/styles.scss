@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+@import 'vendor/normalize';
+
+.asc {
+    border-bottom: 5px solid gray;
+}
+
+.desc {
+  border-top: 5px solid gray !important;
+}
+
+.refresh-button {
+    padding: 1rem;
+}
+
+.sort-header td {
+    cursor: pointer;
+}
