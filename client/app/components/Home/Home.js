@@ -115,7 +115,7 @@ class Home extends Component {
               })
                 .then(res => res.json())
                 .then(rates => {
-                  let updatedDate = (rates.updated_at).toISOString().split("T")[0];
+                  let updatedDate = new Date(rates.updated_at).toISOString().split("T")[0];
                   this.setState({
                     updatedDate: updatedDate,
                     rates: rates.rates,
