@@ -27,7 +27,7 @@ class Home extends Component {
         return response.json();
       })
       .then(currentRate => {
-        if (e && updatedDate != date) {
+        if (e && updatedDate != currentRate.date) {
           currentRate.id = this.state.docId;
           let data = JSON.stringify(currentRate);
           fetch("/api/rates", {
