@@ -118,35 +118,36 @@ class Home extends Component {
         });
 
         // Openrates API to fetch currency rate last 30 days 
-        /* let date = new Date().toISOString().split("T")[0];
-        let now = new Date();
-        let backDate = now.setDate(now.getDate() - 30);
-        backDate = new Date(backDate).toISOString().split("T")[0];
-        let url = `https://api.openrates.io/history?start_at=${backDate}&end_at=${date}&symbols=GBP,EUR,AUD,CAD&base=USD`;
-        fetch(url)
-          .then(response => {
-            return response.json();
-          })
-          .then(rates => {
-            var ff = JSON.stringify(rates.rates);
-            fetch("/api/rates", {
-              method: 'POST',
-              body: ff,
-              headers: {
-                'Content-Type': 'application/json'
-              }
+        if (!rates && !rates.length) {
+          let date = new Date().toISOString().split("T")[0];
+          let now = new Date();
+          let backDate = now.setDate(now.getDate() - 30);
+          backDate = new Date(backDate).toISOString().split("T")[0];
+          let url = `https://api.openrates.io/history?start_at=${backDate}&end_at=${date}&symbols=GBP,EUR,AUD,CAD&base=USD`;
+          fetch(url)
+            .then(response => {
+              return response.json();
             })
-              .then(res => res.json())
-              .then(rates => {
-                let updatedDate = new Date(rates.updated_at).toISOString().split("T")[0];
-                this.setState({
-                  updatedDate: updatedDate,
-                  rates: rates.rates,
-                  filteredRates: rates.rates
+            .then(rates => {
+              var ff = JSON.stringify(rates.rates);
+              fetch("/api/populateRates", {
+                method: 'POST',
+                body: ff,
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+              })
+                .then(res => res.json())
+                .then(rates => {
+                  let updatedDate = new Date(rates.updated_at).toISOString().split("T")[0];
+                  this.setState({
+                    updatedDate: updatedDate,
+                    rates: rates.rates,
+                    filteredRates: rates.rates
+                  });
                 });
-              });
-          }); */
-
+            });
+        }
       });
   }
 

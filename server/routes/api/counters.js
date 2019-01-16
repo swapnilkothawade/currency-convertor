@@ -39,4 +39,32 @@ module.exports = app => {
           .catch((err) => next(err));
       });
   });
+
+  /**
+   * Method to popluate records for a currency rates.
+   * 
+   */
+  app.post("/api/populateRates", function (req, res, next) {
+    let reqRates = req.body;
+    var newObj = {};
+    newObj.rates = [];
+    newObj.updated_at = Date.now();
+    newObj.base = reqRates.base;
+    Object.keys(reqRates).forEach(function (key) {
+      let obj = {
+        date: key,
+        aud: reqRates[key]['AUD'],
+        cad: reqRates[key]['CAD'],
+        gbp: reqRates[key]['GBP'],
+        eur: reqRates[key]['EUR']
+      }
+      newObj.rates = [...newObj.rates, obj]
+    });
+    const rate = new Rate(newObj);
+    rate
+      .save()
+      .then(
+        res.json(rate))
+      .catch(err => next(err));
+  });
 };
