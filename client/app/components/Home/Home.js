@@ -17,6 +17,7 @@ class Home extends Component {
     };
   }
 
+  // Fetch currency rates on refresh
   fetchRates() {
     let date = new Date().toISOString().split("T")[0];
     let url = `https://api.openrates.io/${date}?symbols=GBP,EUR,AUD,CAD&base=USD`;
@@ -32,10 +33,12 @@ class Home extends Component {
       });
   }
 
+  //
   handleClick(e) {
     this.fetchRates();
   }
 
+  //Filter based on column input
   handleChange(e) {
     const originalRates = this.state.rates;
     let regex = new RegExp(e.target.value, 'g');
@@ -45,6 +48,7 @@ class Home extends Component {
     this.setState({ filteredRates });
   }
 
+  // Sorting table columns
   sort(e) {
     const originalRates = this.state.rates;
     let filteredRates = [];
@@ -78,6 +82,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
+    //Internal API to getch currency rates from DB
     fetch("/api/rates").then(response => response.json())
       .then(rates => {
         let updatedDate = rates.length && new Date(rates[0].updated_at).toISOString().split("T")[0];
@@ -90,6 +95,7 @@ class Home extends Component {
           });
           return
         } else {
+          // Openrates API to fetch currency rate last 30 days 
           let date = new Date().toISOString().split("T")[0];
           let now = new Date();
           let backDate = now.setDate(now.getDate() - 30);

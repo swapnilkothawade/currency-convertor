@@ -9,11 +9,12 @@ const Chart = (props) => {
     mainObj.gbp = [];
     mainObj.eur = [];
 
+    // Mapping data for x & y axis for graph
     props.currentRates.map(rate => {
-        mainObj.cad.push({ x: rate.date, y: rate.cad });
-        mainObj.aud.push({ x: rate.date, y: rate.aud });
-        mainObj.gbp.push({ x: rate.date, y: rate.gbp });
-        mainObj.eur.push({ x: rate.date, y: rate.eur });
+        mainObj.cad = [...mainObj.cad, { x: rate.date, y: rate.cad }];
+        mainObj.aud = [...mainObj.aud, { x: rate.date, y: rate.aud }];
+        mainObj.gbp = [...mainObj.gbp, { x: rate.date, y: rate.gbp }];
+        mainObj.eur = [...mainObj.eur, { x: rate.date, y: rate.eur }];
     });
 
     let data = [{

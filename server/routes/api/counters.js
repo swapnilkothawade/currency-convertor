@@ -1,6 +1,12 @@
 const Rate = require("../../models/Rate");
 
 module.exports = app => {
+
+  /**
+ * Method to fetch all records for a currency rates.
+ * 
+ */
+
   app.get("/api/rates", (req, res, next) => {
     Rate.find()
       .exec()
@@ -8,6 +14,10 @@ module.exports = app => {
       .catch(err => next(err));
   });
 
+  /**
+   * Method to post records for a currency rates.
+   * 
+   */
   app.post("/api/rates", function (req, res, next) {
     let reqRates = req.body;
     var newObj = {};
