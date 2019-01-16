@@ -27,8 +27,7 @@ class Home extends Component {
       })
       .then(currentRate => {
         this.setState({
-          currentRate,
-          updatedDate: currentRate.date
+          currentRate
         });
       });
   }
