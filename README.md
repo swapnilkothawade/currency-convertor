@@ -31,3 +31,4 @@ Development (Webpack dev server) mode:
 ```shell
 npm run start:dev
 ```
+### [Live Demo](http://157.230.150.163:8080/)
