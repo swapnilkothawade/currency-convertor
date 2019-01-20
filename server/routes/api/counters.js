@@ -34,7 +34,6 @@ module.exports = app => {
         console.log(rate)
         rate.updated_at = new Date(reqRates.date);
         rate.rates = [...rate.rates, obj];
-        console.log(rate)
         rate.save()
           .then(() => res.json(rate))
           .catch((err) => next(err));
