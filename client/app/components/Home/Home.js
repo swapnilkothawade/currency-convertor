@@ -21,6 +21,9 @@ class Home extends Component {
   fetchRates(e) {
     let date = new Date().toISOString().split("T")[0];
     let updatedDate = this.state.updatedDate && new Date(this.state.updatedDate).toISOString().split("T")[0];
+    let timeDiff = Math.abs((new Date(date)).getTime() - (new Date(this.state.updatedDate)).getTime());
+    let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    console.log(diffDays);
     let url = `https://api.openrates.io/${date}?symbols=GBP,EUR,AUD,CAD&base=USD`;
     fetch(url)
       .then(response => {
@@ -111,14 +114,14 @@ class Home extends Component {
         let updatedDate = rates.length && new Date(rates[0].updated_at).toISOString().split("T")[0];
         let date = new Date().toISOString().split("T")[0];
         this.setState({
-          rates: rates[0].rates,
-          filteredRates: rates[0].rates,
+          rates: rates.length ? rates[0].rates : [],
+          filteredRates: rates.length ? rates[0].rates : [],
           updatedDate: updatedDate,
-          docId: rates[0]._id
+          docId: rates.length ? rates[0]._id : ''
         });
 
         // Openrates API to fetch currency rate last 30 days 
-        if (!rates && !rates.length) {
+        if (!rates.length) {
           let date = new Date().toISOString().split("T")[0];
           let now = new Date();
           let backDate = now.setDate(now.getDate() - 30);
