@@ -28,7 +28,7 @@ module.exports = app => {
       eur: reqRates.rates['EUR']
     }
     console.log(reqRates, obj)
-    Rate.findById(reqRates.id)
+    Rate.init().then(() => Rate.findById(reqRates.id)
       .exec()
       .then((rate) => {
         console.log(rate)
@@ -37,7 +37,8 @@ module.exports = app => {
         rate.save()
           .then(() => res.json(rate))
           .catch((err) => next(err));
-      });
+      }))
+
   });
 
   /**

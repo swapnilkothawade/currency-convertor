@@ -3,11 +3,7 @@ const mongoose = require("mongoose");
 const RateSchema = new mongoose.Schema({
   base: String,
   rates: [{
-    date: {
-      type: String,
-      unique: true,
-      index: true
-    },
+    date: String,
     aud: Number,
     cad: Number,
     eur: Number,
